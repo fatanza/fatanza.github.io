@@ -1,37 +1,752 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budhi Fatanza | Data & Public Policy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fatanza | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --text: #1f2937;
+      --accent: #53687E;
+      --accent-dark: #3A4454;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --radius: 12px;
+      --shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+    }
+  header { position: sticky; top: 0; background: var(--card); box-shadow: var(--shadow); }
+    nav { max-width: 1100px; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 20px;
+    padding: 1rem; }
+    nav a { margin-left: 1rem; text-decoration: none; color: var(--text); font-weight: 600; transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+    .hero { max-width: 1100px; margin: 3rem auto; text-align: center; padding: 2rem; }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: var(--radius); font-weight: 600; text-decoration: none; transition: transform 0.2s; }
+    .btn-primary {background: linear-gradient(135deg, #ff1a1a, #b30000); /* merah ke oranye */ color: #fff;border: none;}
+    .btn-primary:hover {background: linear-gradient(135deg, #cc0000, #660000);
+    /* versi lebih gelap saat hover */transform: translateY(-2px);}
+    section { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; }
+    h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.5rem; transition: all 0.4s ease; /* transisi halus untuk semua perubahan */ }
+    .card-img { width: 100%; height: 180px; /* tinggi preview tetap */ object-fit: cover; /* crop otomatis sesuai card */ border-radius: var(--radius); transition: transform 0.5s ease; /* animasi halus */ }
+    .card:hover { transform: scale(1.01); /* card membesar */ z-index: 2; /* card naik ke atas agar tidak ketimpa */ box-shadow: 0 12px 25px rgba(0,0,0,0.2); /* bayangan lebih dramatis */ }
+    .card:hover .card-img { transform: scale(1.02); /* gambar zoom lebih besar */ }
+    .card h3 { margin-bottom: 0.5rem; }
+    .card p { color: var(--muted); }
+    .details ul {
+      list-style-type: disc;   /* tampilkan bullet bulat */
+      margin-left: 1.5rem;     /* beri jarak dari kiri */
+      padding-left: 0;
+    }
+    .details li {
+      margin-bottom: 0.2rem;   /* jarak antar item */
+    }
+    footer { background: var(--card); padding: 2rem; text-align: center; color: var(--muted); margin-top: 3rem; }
+    html {  scroll-behavior: smooth;}
+    /* Subtle fade-in animation */
+    [data-animate] { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+    [data-animate].visible { opacity: 1; transform: translateY(0); }
+    
+  </style>
 </head>
+
 <body>
+  <header style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 999;
+  ">
+  <nav>
+  <div class="logo"><strong>Fatanza</strong></div>
+  <button class="menu-toggle">☰</button>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#research">Research</a>
+    <a href="#skills">Awards</a>
+    <a href="#audiovisual">Audiovisual</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-    <section class="parallax parallax-hero">
-        <div class="content">
-            <h1>Budhi Fatanza</h1>
-            <p>Data | Policy | Analytics</p>
+
+  <style>
+/* default: desktop */
+.menu-toggle {
+  display: none; /* tidak muncul di desktop */
+}
+
+/* link style + hover */
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: black;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 0;
+}
+
+nav a:hover {
+  color: #fff;
+  background: linear-gradient(270deg, #ff1a1a, #b30000, #ff6600, #ff1a1a);
+  background-size: 400% 400%;
+  animation: fireMove 3s ease infinite;
+}
+
+/* animasi gradient */
+@keyframes fireMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* untuk layar kecil (HP/tablet) */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* muncul di HP */
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -200px;
+    width: 200px;
+    height: 100%;
+    background: #fff;
+    flex-direction: column; /* susun ke bawah */
+    padding: 1rem;
+    transition: right 0.3s ease;
+  }
+
+  .nav-links.show {
+    right: 0; /* geser masuk saat toggle */
+  }
+
+  .nav-links a {
+    display: block; /* tiap link ambil satu baris */
+    margin: 1rem 0; /* jarak antar link */
+    width: 100%;    /* biar rata penuh sidebar */
+  }
+}
+
+  </style>
+
+  <script>
+    const toggleBtn = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+toggleBtn.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('show');
+  });
+});
+});
+
+</script>
+
+  </header>
+
+<!-- Add padding to prevent overlap -->
+<div style="padding-top: 80px;"></div>
+
+  <section class="hero" data-animate>
+    <h1>Budhi Fatanza Wiratama</h1>
+    <p class="intro"> Hi, <strong>I’m Tama</strong>, an award‑winning Data Analyst and Storyteller. I believe data helps us connect with reality in a reflective way and teaches us to embrace what it reveals. For me, understanding data is a way of receiving truth as destiny. Beyond statistics, my skills in writing, graphic design, and audiovisual editing allow me to transform data into stories that are engaging, thought‑provoking, and sometimes  
+      <span class="last">delightfully out of the box. </span>
+    </p>
+    <a href="#research" class="btn btn-primary">Explore My Work</a>
+  </section>
+
+  <style>
+  .intro {
+  color: gray; /* default warna teks */
+}
+
+.last {
+  position: relative;
+  background: none; /* tidak ada highlight saat normal */
+}
+
+
+/* Saat hover di paragraf .intro */
+.intro:hover {
+  color: black; /* seluruh teks jadi hitam */
+}
+
+.intro:hover .last {
+  color: black;
+  animation: glowPulse 1s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 20px #ff6b6b; }
+  to   { text-shadow: 0 0 20px #ffe066; }
+}
+
+  </style>
+
+  <script>
+  </script>
+
+  <section id="experience" style="scroll-margin-top: 100px;" data-animate>
+  <h2>Experience</h2>
+  
+  <ul style="list-style: none; padding: 0;">
+    
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card">
+        <h3 class="job-title">
+            <span class="toggle-icon">▶</span>
+            Statistician, BPS Statistics of South Kalimantan Province
+            <span class="term"> (2024-Present)</span>
+        </h3>
+        <div class="details">
+          <ul>
+            <li>Collecting, Processing, Analyzing, and Disseminating Data of Social-Economy National Survey</li>
+            <li>Creating Data Storytelling Content in "Wadai" segment for Social Media</li>
+            <li>Collecting, Processing, Evaluating and Analyzing Data of Village Potential Survey</li>
+          </ul>
+          </div>
         </div>
-    </section>
+    </li>
 
-    <section class="about section-container">
-        <h2>About Me</h2>
-        <p>I work at the intersection of data analytics and public policy...</p>
-    </section>
-
-    <section class="parallax parallax-mid">
-        <div class="content">
-            <h2>Projects & Focus</h2>
-            <p>Public sector performance • Economic modeling • Policy evaluation</p>
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card">
+        <h3 class="job-title">
+            <span class="toggle-icon">▶</span>
+            Statistician, BPS Statistics of Barito Kuala Regency 
+            <span class="term"> (2021-2024)</span>
+        </h3>
+        <div class="details">
+          <ul>
+            <li>Leading the Public Relation Team</li>
+            <li>National Instructure of 2023 Agricultural Census</li>
+            <li>National Instructure of Post-Enumeration Survey 2023 Agricultural Census</li>
+          </ul>
         </div>
-    </section>
+        </div>
+    </li>
 
-    <section class="contact section-container">
-        <h2>Contact</h2>
-        <p>Email: your@email.com</p>
-    </section>
+    <li style="margin-bottom: 0.5rem;">
+        <div class="card">
+        <h3 class="job-title">
+            <span class="toggle-icon">▶</span>
+            Data Analyst (Freelance), Ministry of Industry
+            <span class="term">(2020-2021)</span>
+        </h3>
+        <div class="details">
+          <ul>
+            <li>Processing, Analyzing, and Evaluating Monthly Data of Forest- and Plantation-Based Industry </p>
+            <li>Creating an Esmation Model of Time Series Data</p>
+            <li>Creating a Dissmeination Presentation for Monthly Report</p>
+          </ul>
+        </div>
+        </div>
+    </li>
 
+    <style>
+    /* Hide details initially */
+    .details {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  overflow: hidden;
+  transition: 
+    max-height 0.6s cubic-bezier(0.25, 1.25, 0.5, 1), 
+    opacity 0.6s ease, 
+    transform 0.6s ease;
+}
+
+.details.show {
+  max-height: 1000px;   /* cukup besar agar muat isi */
+  opacity: 1;
+  transform: translateY(0);
+}
+    
+    /* Style toggle icon */
+    .toggle-icon {
+        cursor: pointer;
+        margin-right: 8px;
+        font-weight: bold;
+        color: #b30000;
+         display: inline-block;
+         transition: transform 0.3s ease;
+  } 
+  
+  .toggle-icon.open {
+  transform: rotate(90deg);
+  color: #53687E;
+  
+  /* rotate to point down */ }
+
+  .job-title .term { 
+    font-weight: normal; /* not bold */
+    font-size: 0.9rem;  
+    background: lightgrey; /* highlight */ 
+    padding: 5px; /* little spacing */
+    border-radius: 4px; 
+  /* rounded corners */ }
+        
+        </style>
+        
+        <script>
+        // Toggle details on icon click
+       document.querySelectorAll('.toggle-icon').forEach(icon => {
+  icon.addEventListener('click', () => {
+    const details = icon.parentElement.nextElementSibling;
+    const isOpen = details.classList.contains('show');
+
+    if (isOpen) {
+      details.style.maxHeight = null;
+      details.classList.remove('show');
+      icon.classList.remove('open');
+    } else {
+      details.style.maxHeight = details.scrollHeight + "px";
+      details.classList.add('show');
+      icon.classList.add('open');
+    }
+  });
+});
+
+
+</script>
+
+  </ul>
+  </section>
+
+  <section id="research" style="scroll-margin-top: 100px;" data-animate>
+    <h2>Researches and Publications</h2>
+    <ul style="list-style: none; padding: 0;">
+    
+
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card" style="line-height: 1.2;">
+        <h4 style="margin-bottom: 0.3rem;""font-weight: light">
+          Murjani, A., & <span class="hl">&thinsp;Wiratama, B. F.&thinsp;</span> (2025). Simpson index and food security: The case study of Kalimantan. <em>Jurnal Ekonomi Indonesia</em>, 14(2), 145-161.
+          <span class="term"> <a href="https://jurnal.isei.or.id/index.php/isei/article/view/559"><u>doi.org/10.52813/jei.v14i2.559</u></a></span>
+          - <em> Oral Presentation, ISEI Congress 2024 </em>
+        </h4>
+        <p class="excerpt" style="text-align: justify;">
+        Dietary diversity is a reliable indicator of food security. This study examines 
+        <span class="more-text">
+        diversity in consumption through the Simpson Index using the food expenditure approach at the regency and city levels in Indonesia, with a particular focus on Kalimantan, the location of the new capital city, Nusantara. Further analysis explores the relationship between dietary diversity and food inflation, a key aspect of food security. The data used to develop the index is drawn from the National Socio-Economic Survey (SUSENAS) conducted by Statistics Indonesia from 2020 to 2023. Food inflation modeling was performed using the Threshold Panel Regression method on data from 90 cities. The findings suggest that concerted efforts are required to enhance food diversity in the supporting regions around IKN, particularly in South Kalimantan, which exhibits a relatively lower Simpson Index compared to other areas in Kalimantan. Moreover, the Simpson Index achievement has a significant impact on reducing food inflation rates.
+        </span>
+        <span class="toggle">... (more)</span>
+        </p>
+      </div>
+    </li>
+    
+   <li style="margin-bottom: 0.5rem;">
+      <div class="card" style="line-height: 1.2;">
+        <h4 style="margin-bottom: 0.3rem;""font-weight: light">
+          Murjani, A., & <span class="hl">&thinsp;Wiratama, B. F.&thinsp;</span> (2025). Unlocking the Potential of Input-Output Tables for Spatial Analysis Using the Miyazawa Model: A Case Study of East Java Province. <em>Proceedings of The International Conference on Data Science and Official Statistics</em>, 2025(1), 872–892.
+          <span class="term"> <a href="https://proceedings.stis.ac.id/icdsos/article/view/530"><u>doi.org/10.34123/icdsos.v2025i1.530</u></a></span>
+          - <em> Oral Presentation, International Conference on Data Science and Official Statistic 2025</em>
+        </h4>
+        <p class="excerpt" style="text-align: justify;">
+        East Java Province holds a strategic role in the national economy, serving as the second-largest contributor to GDP 
+        <span class="more-text">
+        after Jakarta and as a key trade hub to Eastern Indonesia. Yet regional disparities remain substantial, particularly reflected in the economic underdevelopment and weak logistics connectivity of Madura Island, which lies adjacent to the Gerbangkertosusila growth corridor. Addressing this gap requires a deeper understanding of sectoral and spatial linkages that shape Madura’s growth trajectory. This study applies the Miyazawa Input-Output Model for East Java Province, integrating 17 economic sectors and 38 regencies/municipalities to enable simultaneous sectoral and regional analysis. The simulations assess the effects of increasing household income in Madura, spillover from surrounding regions, and the combined role of strengthening the Transportation and Warehousing sector alongside Agriculture and Manufacturing. The findings show that the logistics sector in Madura, when considered independently, has limited impact; however, its significance rises when complemented by productive local sectors. Moreover, spillover from surrounding regions into Madura proves weaker than spillover directed outside Madura, underscoring the island’s fragile spatial connectivity. These results highlight the urgency of affirmative policies that strengthen productive sectors, enhance interregional linkages, and ensure Madura’s integration into East Java’s broader economic development.
+        </span>
+        <span class="toggle">... (more)</span>
+        </p>
+      </div>
+    </li>
+
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card" style="line-height: 1.2;">
+        <h4 style="margin-bottom: 0.3rem;""font-weight: light">
+          <span class="hl">&thinsp;Wiratama, B. F.&thinsp;</span>, Kurniawan, R., Isnaeni, M. A., Sumargo, B., & Gio, P. U. (2023). Measuring the physical infrastructure development as poverty reduction program in Kalimantan, Indonesia. <em>Cities, 141</em>, 104515.
+          <span class="term"> <a href="https://doi.org/10.1016/j.cities.2023.104515"><u>doi.org/10.1016/j.cities.2023.104515</u></a></span>
+          - <em>Scopus Q1-Indexed Journal</em>
+        </h4>
+        <p class="excerpt" style="text-align: justify;">
+        Infrastructure plays a vital role in rural development. There is frequently  
+        <span class="more-text">
+        a disparity in infrastructure development between rural and urban areas in developing countries, including Indonesia. Thus, a comprehensive analysis of infrastructure development is required. This study seeks to evaluate the impact of infrastructure development in Kalimantan, Indonesia, using the Physical Infrastructure Index framework. Using principal component analysis, this study develops the Physical Infrastructure Index. Derived from the Village Potential Survey data, the data consists of 30 indicators organized into 7 dimensions. The findings from this research show a disparity in Physical Infrastructure Index between municipalities and districts. This reflects the fact that infrastructure development in Indonesia focuses more on municipalities than districts, which are geographically difficult to access. This disparity contributes to Indonesia's poverty dilemma. It has also been demonstrated that the development of infrastructure has an effect on poverty reduction, whether in regions or municipalities.
+        </span>
+        <span class="toggle">... (more)</span>
+        </p>
+      </div>
+    </li>
+
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card" style="line-height: 1.2;">
+        <h4 style="margin-bottom: 0.3rem;""font-weight: light">
+          <span class="hl">&thinsp;Wiratama, B. F.&thinsp;</span>, & Safitri, Z. (2023). Is Islamic Economy as that Green? <em>Al-Muzara'ah, 11(1)</em>, 103-118.
+          <span class="term"> <a href="https://journal.ipb.ac.id/index.php/jalmuzaraah/article/view/48003"><u>doi.org/10.29244/jam.11.1.103-118</u></a></span>
+          - <em> Oral Presentation, 6th Annual Islamic Finance Conference 2022</em>
+        </h4>
+        <p class="excerpt" style="text-align: justify;">
+        Economic growth is widely associated with degradation of environmental quality. Green economy   
+        <span class="more-text">
+        is a term that later emerged to save the environment. In Islamic point of view, the environment and the economy are two things that must support each other. This study discusses Islamic economics that should be associated with sustainability, as in line with the teachings of Islam to coexist with the environment. The method used are correlation analysis and panel data regression to find out the association between Islamic economics and green growth in major Islamic economic countries. The results show that the Global Islamic Economy Indicator (GIEI) is positively correlated to the Green Growth Index (GGI). Based on the panel data regression model, Muslim Modest Fashion sector   significantly has a positive effect on GGI. Unfortunately, in general, the GGI achievements of the OIC countries are still very lacking compared to non-OIC countries. It is the government's duty to start implementing environmentally oriented policies in all sectors of the Islamic economy inclusively
+        </span>
+        <span class="toggle">... (more)</span>
+        </p>
+      </div>
+    </li>
+
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card" style="line-height: 1.2;">
+        <h4 style="margin-bottom: 0.3rem;""font-weight: light">
+          <span class="hl">&thinsp;Wiratama, B. F.&thinsp;</span>, & Safitri, Z. (2023). Measuring the Development of Islamic Education in Indonesia. <em>Muslim Education Review, 2(1)</em>, 27-41.
+          <span class="term"> <a href="https://journal.uiii.ac.id/index.php/mer/article/view/161"><u>doi.org/10.56529/mer.v2i1.161</u></a></span>
+          <em> </em>
+        </h4>
+        <p class="excerpt" style="text-align: justify;">
+        Islam holds an important position in various human development processes in Indonesia,    
+        <span class="more-text">
+        one of them is in the education sector. The Indonesian government through the Ministry of Religious Affairs established madrasas and Islamic Higher Education as an Islamic-based formal educational institution. Through logic and science, education is the way for humans to develop equally regardless of their gender. Herein lies the role of Islamic-based education to uphold this anti-discrimination principle. This research has the aim of conducting a composite index, namely the Islamic Education Development Index (IEDI) to describe the condition of Islamic education development at the provincial level in Indonesia. In addition, statistical modeling is carried out to see the influence of Islamic education on the Gender Development Index (GDI). The IEDI is a composite index consisting of five indicators including infrastructure accessibility, teaching competence, institutional ranking, outcomes, and quality of the learning process. Based on the research results, the average IEDI score of provinces in Indonesia is 45.13 for the period 2019. The best IEDI score by province is Yogyakarta, reaching a score of 55.00, and the lowest is North Kalimantan, which is only 35.90. Based on modeling results, it was also found that the IEDI has a significant effect on increasing the GDI at the confidence interval (CI) up to 95 percent. Governments can begin to pay more attention to Islamic-based education to optimize this influence.
+        </span>
+        <span class="toggle">... (more)</span>
+        </p>
+      </div>
+    </li>
+
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card" style="line-height: 1.2;">
+        <h4 style="margin-bottom: 0.3rem;""font-weight: light">
+          <span class="hl">&thinsp;Wiratama, B. F.&thinsp;</span>, & Pasaribu, E. (2022). Measuring the magnitude of film tourism as a catalyst of the Indonesian tourism sector: A case study of laskar pelangi film in belitung island. <em>The Journal of Indonesia Sustainable Development Planning, 3(1)</em>, 1-13.
+          <span class="term"> <a href="https://jurnal.pusbindiklatren.bappenas.go.id/lib/jisdep/article/view/255"><u>doi.org/10.46456/jisdep.v3i1.255</u></a></span>
+          <em> </em>
+        </h4>
+        <p class="excerpt" style="text-align: justify;">
+        The creative economy is a new paradigm to be reckoned with. Unfortunately, film as the priority   
+        <span class="more-text">
+        sub-sector of Indonesia's Creative Economy failed to become one of the five sub-sectors with the largest multiplier effect to other sub-sectors of the creative economy. There is an immeasurable impact of film on the tourism sector which is known as film tourism. This research conducts empirical evidence on the case study of Belitung Island and the Laskar Pelangi film to measure the magnitude of the film tourism effect. The analytical method used in this study is the ARIMA (Autoregressive Integrated Moving Average) intervention modelling. The results of the intervention model show that the Laskar Pelangi film and the Kata Museum of Andrea Hirata have a significant direct effect on the tourist arrival in Belitung Island. Meanwhile, the influence of the Tanjung Kelayang Tourism SEZ was significant almost one year after it was established. The increase in tourist arrival due to Laskar Pelangi film tourism is two times higher than without the effect, indicating that the film tourism phenomenon is possible to become a new form of innovation that is effective as a catalyst for the future of Indonesia's tourism sector.
+        </span>
+        <span class="toggle">... (more)</span>
+        </p>
+      </div>
+    </li>
+
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card" style="line-height: 1.2;">
+        <h4 style="margin-bottom: 0.3rem;""font-weight: light">
+          <span class="hl">&thinsp;Wiratama, B. F.&thinsp;</span>, & Nasida, F. K. (2021). Kajian Kerentanan Ekonomi Indonesia terhadap Pandemi COVID-19. <em>Kajian Ekonomi Dan Keuangan, 5(2)</em>, 103-117.
+          <span class="term"> <a href="https://fiskal.kemenkeu.go.id/ejournal/index.php/kek/article/view/679"><u>doi.org/10.31685/kek.v5i2.679</u></a></span>
+          <em> </em>
+        </h4>
+        <p class="excerpt" style="text-align: justify;">
+        The COVID-19 pandemic is a serious problem for the economies of many countries, including Indonesia. Low specimen testing capacity, 
+        <span class="more-text">
+        causing uncontrolled transmission. The Indonesian economy is faced with a recession. The economic vulnerability to the COVID-19 pandemic needs attention as a basis for making the right policies. This study aims to build an economic vulnerability index to COVID-19 and map the vulnerability of the regional economy to form priority groups for economic policies. This index consists of two dimensions: exposure and shock. It was found that the score for Indonesiaâ€™s economic vulnerability index to COVID-19 reached 56,58. Provinces in Java Island tend to have high economic vulnerability, especially DKI Jakarta. Furthermore, the economic vulnerability index has a significant negative relationship with the GRDP growth in the 2nd quarter of 2020. Through quadrant analysis, four priority groups were obtained. Priority I consist of DKI Jakarta, Banten, West Java, Bali and DI Yogyakarta which need more attention because of high possibility of shocks and structurally more exposed to the economic impacts caused by the COVID-19 pandemic shocks.
+        </span>
+        <span class="toggle">... (more)</span>
+        </p>
+      </div>
+    </li>
+
+    <li style="margin-bottom: 0.5rem;">
+      <div class="card" style="line-height: 1.2;">
+        <h4 style="margin-bottom: 0.3rem;""font-weight: light">
+          <span class="hl">&thinsp;Wiratama, B. F.&thinsp;</span>, & Prasidana, M. Y. G. (2020). Sistem Peringatan Real-Time Berbasis Twitter untuk Bencana Kebakaran di Kota Jakarta. <em>Jurnal Riset Jakarta, 13(2)</em>, 95-104.
+          <span class="term"> <a href="https://www.jurnal.drdjakarta.id/index.php/jurnalDRD/article/view/41"><u>https://doi.org/10.37439/jurnaldrd.v13i2.41</u></a></span>
+          <em> </em>
+        </h4>
+        <p class="excerpt" style="text-align: justify;">
+        The COVID-19 pandemic is a serious problem for the economies of many countries, including Indonesia. Low specimen testing capacity, 
+        <span class="more-text">
+        causing uncontrolled transmission. The Indonesian economy is faced with a recession. The economic vulnerability to the COVID-19 pandemic needs attention as a basis for making the right policies. This study aims to build an economic vulnerability index to COVID-19 and map the vulnerability of the regional economy to form priority groups for economic policies. This index consists of two dimensions: exposure and shock. It was found that the score for Indonesiaâ€™s economic vulnerability index to COVID-19 reached 56,58. Provinces in Java Island tend to have high economic vulnerability, especially DKI Jakarta. Furthermore, the economic vulnerability index has a significant negative relationship with the GRDP growth in the 2nd quarter of 2020. Through quadrant analysis, four priority groups were obtained. Priority I consist of DKI Jakarta, Banten, West Java, Bali and DI Yogyakarta which need more attention because of high possibility of shocks and structurally more exposed to the economic impacts caused by the COVID-19 pandemic shocks.
+        </span>
+        <span class="toggle">... (more)</span>
+        </p>
+      </div>
+    </li>
+
+    </ul>
+
+  </section>
+
+  <style>
+    .excerpt {
+  line-height: 1.3;
+}
+
+.more-text {
+  display: none;
+}
+
+.toggle {
+  cursor: pointer;
+  font-style: italic;
+  color: inherit;          /* same color as text */
+  white-space: nowrap;
+}
+
+    .card .hl
+    { 
+      font-weight: black; /* hilangkan bold */ 
+      font-weight: light;
+      font-size: 1rem;
+      color: black;          /* normal state: black text */
+      background: lightgrey; /* highlight background */
+      padding: 1px;
+      border-radius: 4px;
+      text-decoration: none; /* remove underline */
+    }
+
+    .card .excerpt .toggle
+    {
+      style: normal;
+    }
+    
+    .card .term a {
+  font-weight: light;
+  font-size: 0.9rem;
+  color: black;          /* normal state: black text */
+  padding: 1px;
+  border-radius: 2px;
+  text-decoration: none; /* remove underline */
+}
+
+.card .term a:hover {
+  color: white;          /* hover state: white text */
+  background: darkgrey;  /* background changes on hover */
+}
+
+
+    </style>
+
+    <script>
+document.querySelectorAll(".toggle").forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    const moreText = toggle.previousElementSibling;
+    const expanded = moreText.style.display === "inline";
+    
+    moreText.style.display = expanded ? "none" : "inline";
+    toggle.textContent = expanded ? "... (more)" : ">less<";
+  });
+});
+</script>
+
+
+  <section id="skills" style="scroll-margin-top: 100px;" data-animate>
+  <h2>Awards and Grants</h2>
+  <div class="grid grid-3">
+    <!-- Card with image -->
+    <div class="card">
+      <img src="images/ftpusaka25.jpeg" alt="Awarding of Pusaka Jateng 2025" class="card-img" />
+      <h3 style="line-height: 1.3;">First Winner Prize, Forum Pusaka Jateng by Central Bank of the Republic of Indonesia, 2025</h3>
+      <p style="line-height: 1.2;">My Paper entitled "Developing the Potential of Sustainable Tourism Based on Railways: A Case Study of Local Train Routes in Central Java" won the First Winner Prize at Pusaka Jateng, Forum for Formulating Policy Analysis and Recommendations of Central Java.</p>
+    </div>
+
+    <div class="card">
+      <img src="images/ftindathon24.jpeg" alt="Welcoming Event at Australian Bureau of Statistics" class="card-img" />
+      <h3 style="line-height: 1.3;">First Winner Prize, Indonesia Data Hackathon by Australian Buerau of Statistics, 2024-2025</h3>
+      <p style="line-height: 1.2;">Our Team's Presentation entitled "Living Longer is not Enough" won the First Winner Prize and a Travel Grants to present at Australian Bureau of Statistics, Department of Social, Department of Health and Ageing, and Australian National University.</p>
+    </div>
+
+    <!-- Card with image -->
+    <div class="card">
+      <img src="images/ftgirai25.jpeg" alt="Winner Spotlight on GIRAI's Social Media" class="card-img" />
+      <h3 style="line-height: 1.3;">Second Runner Up, GIRAI Data Viz Challenge by Global Center of Respnsible AI, 2025</h3>
+      <p style="line-height: 1.2;">Our Data Visualization entitled "Beastly Challenges in Responsible AI and Where to Find Them" trying to highlights the complexity and diversity of issues countries face as they navigate the ever-changing landscape of AI ethics and governance</p>
+    </div>
+  </div>
+</section>
+
+
+  <section id="audiovisual" style="scroll-margin-top: 100px;">
+  <h2>Audiovisual</h2>
+  <div class="film-grid">
+    <!-- Film 1 -->
+    <div class="film-card">
+      <img src="images/daminah18.png" alt="Daminah (2018)">
+      <div class="overlay">
+        <h2>Daminah (2018) - Director & Writer</h2>
+        <p><strong>🏆 Silver Jury Prize and Bronze People Choice at Olimpiade Perguruan Tinggi Kedinasan 2018</strong></p>
+        <p><em>An ambitious yet conflicted boy questions the direction of his life when a mysterious girl unexpectedly disrupts his solitude.</em></p>
+        </div>
+    </div>
+
+    <!-- Film 2 -->
+    <div class="film-card">
+      <img src="images/bertram18.png" alt="Bertemu Ramadan (2018)">
+      <div class="overlay">
+        <h2>Bertemu Ramadan (2018) - Director & Writer</h2>
+        <p><strong>🏆 First Winner Ramadan Short Film Competition by BPS Statistics' Mosque 2018</strong></p>
+        <p><em>Not everyone greets Ramadan with excitement, and not every choice made along the way leads to the right path.</em></p>
+        </div>
+    </div>
+
+    <!-- Film 3 -->
+    <div class="film-card">
+      <img src="images/tsp18.png" alt="Tentang Sebuah Pilihan (2018)">
+      <div class="overlay">
+        <h2>Tentang Sebuah Pilihan (2018) - Director & Writer</h2>
+        <p><strong>🏆 Official Selection Ministry of Cooperatives and Small and Medium Enterprises Short Film Competition 2018</strong></p>
+        <p><em>Left behind in the basement, Duri and Mala struggle to revive the forgotten Student’s Mart. Can they survive the weight of it all?</em></p>
+        </div>
+    </div>
+
+    <div class="film-card">
+      <img src="images/kirkar19.png" alt="Kira Kara (2019)">
+      <div class="overlay">
+        <h2>Kira Kara (2019) - Director, Producer, Writer </h2>
+        <p><strong>🏆 Best Film and Best Cinematography Nomination at Indonesian Census Film Festival 2019</strong></p>
+        <p><em>Kara always measured the world in estimates. One day, a cold respondent tried to tell her the truth.</em></p>
+        </div>
+    </div>
+
+     <div class="film-card">
+      <img src="images/10th23.png" alt="10 Tahun Kemudian (2023)">
+      <div class="overlay">
+        <h2>10 Tahun Kemudian (2023) - Director & Writer </h2>
+        <p><strong>🏆 Bronze Jury Prize and People Choice Award at Indonesian Census Film Festival 2023</strong></p>
+        <p><em>Humaidi is a subsistence farmer with a small plot of land and a child who is growing up. But ten years later, everything has changed.</em></p>
+        </div>
+    </div>
+
+    <div class="film-card">
+      <img src="images/hsn25.png" alt="Statistik Membuka Mata (2024)">
+      <div class="overlay">
+        <h2>Statistik Membuka Mata (2024) - Director & Writer </h2>
+        <p><strong>🏆 Best Short Film at Hari Statistik Nasional Award 2024</strong></p>
+        <p><em>Did you know that data can go far beyond what you expect?</em></p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<style>
+#audiovisual {
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(270deg, #c3c3c3ff, #eaeaeaff, #ffffffff, #8a8a8aff);
+  background-size: 400% 400%;
+  animation: fireMove 5s ease infinite;
+}
+
+.film-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 3 columns by default */
+  gap: 0rem;
+}
+
+/* Responsive: on smaller screens, show only 1 column */
+@media (max-width: 768px) {
+  .film-grid {
+    grid-template-columns: 1fr; /* single column */
+  }
+}
+
+.film-card {
+  width: 100%;     /* full width of its grid column */
+  aspect-ratio: 5 / 3;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.film-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.film-card img {
+  width: 100%;
+  height: 100%;        /* force image to fill card */
+  object-fit: cover;   /* crop/scale image proportionally */
+  display: block;
+}
+
+.film-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Overlay text */
+.overlay {
+  position: absolute;
+  bottom: -300%;   /* start hidden below the card */
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 95%);
+  color: #fff;
+  padding: 1rem;
+  text-align: left;
+  transition: bottom 0.5s ease; /* animate vertical movement */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;   /* keep text at bottom inside overlay */
+  min-height: 30%;             /* overlay height */
+}
+
+.film-card:hover .overlay {
+  bottom: 0; /* slides up into view */
+}
+
+.overlay h2 {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+}
+
+.overlay p {
+  font-size: 0.7rem;
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+</style>
+
+
+  <section id="contact" style="scroll-margin-top: 100px;" data-animate>
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:fatanzawiratama@gmail.com">fatanzawiratama@gmail.com</a></p>
+    <p>GitHub | LinkedIn | Instagram</p>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> Budhi. Original & Authentic.</p>
+  </footer>
+
+  <script>
+    // Fade-in animation on scroll
+    const elements = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    elements.forEach(el => observer.observe(el));
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
