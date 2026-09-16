@@ -3,637 +3,383 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Budhi Fatanza | Cyber-Kinetic Portfolio</title>
+  <title>Budhi Fatanza — Portfolio</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #07090e;
-      --bg-card: rgba(16, 23, 38, 0.65);
-      --border-card: rgba(255, 255, 255, 0.08);
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --accent-grad: linear-gradient(135deg, #ff0055, #7928ca, #00dfd8);
-      --neon-cyan: #00dfd8;
-      --neon-pink: #ff0055;
-      --radius: 16px;
+      --bg: #0d0e10;
+      --text: #e4e4e7;
+      --muted: #8e8e93;
+      --border: #27272a;
+      --accent: #ffffff;
+      --max-w: 800px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       scroll-behavior: smooth;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Inter', -apple-system, sans-serif;
       background-color: var(--bg);
-      color: var(--text-main);
-      overflow-x: hidden;
+      color: var(--text);
+      line-height: 1.6;
     }
 
-    /* Interactive Dynamic Canvas Background */
-    #bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      pointer-events: none;
+    body {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
     }
 
-    /* Floating Header Glassmorphism */
+    /* Minimal Header / Nav */
     header {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 1100px;
-      background: rgba(16, 23, 38, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-card);
-      border-radius: 50px;
-      z-index: 1000;
-      padding: 0.8rem 2rem;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5rem;
+    }
+
+    .brand {
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
     }
 
     nav {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      background: var(--accent-grad);
-      background-size: 200% 200%;
-      animation: gradMove 4s ease infinite;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
       gap: 1.5rem;
     }
 
-    .nav-links a {
+    nav a {
+      color: var(--muted);
       text-decoration: none;
-      color: var(--text-muted);
-      font-weight: 600;
       font-size: 0.9rem;
-      transition: all 0.3s ease;
-      position: relative;
+      transition: color 0.2s ease;
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--neon-cyan);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover { color: #fff; }
-    .nav-links a:hover::after { width: 100%; }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.3rem;
-      cursor: pointer;
+    nav a:hover {
+      color: var(--text);
     }
 
     /* Hero Section */
     .hero {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 6rem 1.5rem 2rem;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(0, 223, 216, 0.08);
-      border: 1px solid rgba(0, 223, 216, 0.3);
-      padding: 6px 18px;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      color: var(--neon-cyan);
-      margin-bottom: 2rem;
-      box-shadow: 0 0 15px rgba(0, 223, 216, 0.15);
-    }
-
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--neon-cyan);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--neon-cyan);
-      animation: pulse 1.5s infinite;
+      margin-bottom: 6rem;
     }
 
     .hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 4rem;
-      font-weight: 700;
-      line-height: 1.1;
+      font-size: 2.5rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
       margin-bottom: 1.5rem;
+      color: var(--accent);
     }
 
-    .typed-wrapper {
-      background: var(--accent-grad);
-      background-size: 200% 200%;
-      animation: gradMove 4s ease infinite;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .hero h1 em {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--muted);
     }
 
-    .hero .intro {
-      color: var(--text-muted);
-      font-size: 1.15rem;
-      max-width: 750px;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      font-weight: 300;
+      max-width: 650px;
+      line-height: 1.7;
     }
 
-    .glow-btn {
-      position: relative;
-      padding: 0.9rem 2.2rem;
-      border-radius: 50px;
-      font-weight: 700;
-      text-decoration: none;
-      color: #fff;
-      background: var(--bg);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      overflow: hidden;
-      transition: all 0.4s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .glow-btn::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: var(--accent-grad);
-      border-radius: 50px;
-      z-index: -1;
-      transition: opacity 0.4s ease;
-      opacity: 0.5;
-    }
-
-    .glow-btn:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 10px 30px rgba(255, 0, 85, 0.4);
-    }
-
-    .glow-btn:hover::before { opacity: 1; }
-
-    /* Layout & Cards Section */
+    /* Section Layout */
     section {
-      max-width: 1100px;
-      margin: 6rem auto;
-      padding: 0 1.5rem;
-      scroll-margin-top: 120px;
+      margin-bottom: 5rem;
+      scroll-margin-top: 3rem;
     }
 
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 700;
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
       margin-bottom: 2rem;
+    }
+
+    /* Minimal Items List */
+    .item-list {
       display: flex;
-      align-items: center;
-      gap: 15px;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    .section-title span { color: var(--neon-cyan); }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius);
-      padding: 1.8rem;
-      backdrop-filter: blur(12px);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .card:hover {
-      border-color: rgba(0, 223, 216, 0.4);
-      transform: translateY(-6px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 223, 216, 0.1);
+    .item:last-child {
+      border-bottom: none;
     }
 
-    /* Interactive Accordion */
-    .acc-header {
+    .item-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
+      align-items: baseline;
+      gap: 1rem;
     }
 
-    .acc-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
+    .item-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
     }
 
-    .acc-header:hover .acc-icon {
-      background: var(--neon-cyan);
-      color: #000;
+    .item-title:hover {
+      text-decoration: underline;
     }
 
-    .acc-content {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0, 1, 0, 1);
+    .item-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      white-space: nowrap;
     }
 
-    .acc-content.open {
-      max-height: 500px;
-      opacity: 1;
-      padding-top: 1.2rem;
-      margin-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.05);
+    .item-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.6;
     }
 
-    /* Grid Layouts */
-    .grid-dynamic {
+    .award-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 0.3rem;
+    }
+
+    /* Media Grid Minimal */
+    .media-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem;
     }
 
-    /* Audiovisual Hover Dynamic */
     .media-card {
-      position: relative;
-      height: 260px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border-card);
+      text-decoration: none;
+      color: inherit;
     }
 
-    .media-card img {
+    .media-thumb {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background-color: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+    }
+
+    .media-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0.8;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .media-card:hover img {
-      transform: scale(1.15) rotate(-1deg);
+      opacity: 1;
+      transform: scale(1.03);
     }
 
-    .media-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(7,9,14,0.95) 10%, rgba(7,9,14,0.2) 70%, transparent);
-      padding: 1.5rem;
+    .media-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .media-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Contact & Footer */
+    footer {
+      margin-top: 8rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.4s ease;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.85rem;
     }
 
-    .media-card:hover .media-overlay {
-      opacity: 1;
-      transform: translateY(0);
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.2rem;
     }
 
-    /* Footer & Contact */
-    .contact-card {
-      text-align: center;
-      padding: 4rem 2rem;
-      background: radial-gradient(circle at center, rgba(121, 40, 202, 0.15), transparent 70%), var(--bg-card);
+    .footer-links a:hover {
+      color: var(--text);
     }
 
-    /* Keyframes */
-    @keyframes pulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 223, 216, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 223, 216, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 223, 216, 0); }
-    }
-
-    @keyframes gradMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Scroll Animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      header { width: 95%; padding: 0.8rem 1.2rem; }
-      .nav-links { display: none; }
-      .menu-toggle { display: block; }
+    @media (max-width: 600px) {
+      body { padding: 2rem 1rem; }
+      header { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 3rem; }
+      nav { gap: 1rem; }
+      .hero h1 { font-size: 2rem; }
+      .item-header { flex-direction: column; gap: 0.2rem; }
+      footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .footer-links a { margin-left: 0; margin-right: 1.2rem; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Background Interactive Particles -->
-  <canvas id="bg-canvas"></canvas>
-
-  <!-- Navbar -->
+  <!-- Header Minimal -->
   <header>
+    <div class="brand">Budhi Fatanza</div>
     <nav>
-      <div class="logo">FATANZA</div>
-      <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-      <div class="nav-links">
-        <a href="#experience">Experience</a>
-        <a href="#research">Research</a>
-        <a href="#awards">Awards</a>
-        <a href="#audiovisual">Media</a>
-        <a href="#contact">Contact</a>
-      </div>
+      <a href="#experience">Pengalaman</a>
+      <a href="#research">Riset</a>
+      <a href="#awards">Penghargaan</a>
+      <a href="#audiovisual">Film</a>
     </nav>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="status-badge">
-      <div class="pulse-dot"></div> Available for Data & Creative Projects
-    </div>
-    <h1>Budhi Fatanza<br><span class="typed-wrapper"><span id="typed-text"></span></span></h1>
-    <p class="intro">
-      Bridging data precision with dynamic storytelling. I transform complex analytical figures into visual narratives that engage, inspire, and drive real perspective.
+    <h1>Data Analyst & <em>Visual Storyteller</em></h1>
+    <p>
+      Berbasis di Indonesia. Berfokus pada pengolahan data statistik, riset kebijakan sosial-ekonomi, dan penyampaian narasi visual melalui media film dan desain.
     </p>
-    <a href="#research" class="glow-btn">
-      <span>Explore Masterpieces</span>
-      <i class="fas fa-arrow-down"></i>
-    </a>
   </section>
 
-  <!-- Experience -->
-  <section id="experience" class="reveal">
-    <div class="section-title"><span>01.</span> Experience</div>
-    
-    <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+  <!-- Pengalaman -->
+  <section id="experience">
+    <div class="section-label">Pengalaman Kerja</div>
+    <div class="item-list">
       
-      <div class="card">
-        <div class="acc-header">
-          <div>
-            <h3>Statistician <span style="color: var(--neon-cyan);">@ BPS South Kalimantan</span></h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">2024 — Present</p>
-          </div>
-          <div class="acc-icon"><i class="fas fa-plus"></i></div>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Statistician — BPS Provinsi Kalimantan Selatan</span>
+          <span class="item-meta">2024 — Sekarang</span>
         </div>
-        <div class="acc-content">
-          <p style="color: var(--text-muted); line-height: 1.7;">
-            • Leading the processing, analyzing, and dissemination of Social-Economy National Survey data.<br>
-            • Creator of data storytelling segment <strong>"Wadai"</strong> for digital outreach.<br>
-            • Analyzing key regional metrics for the Village Potential Survey (PODES).
-          </p>
-        </div>
+        <p class="item-desc">Mengolah dan menganalisis data Survei Sosial Ekonomi Nasional (Susenas) serta menginisiasi konten data storytelling "Wadai" untuk diseminasi publik.</p>
       </div>
 
-      <div class="card">
-        <div class="acc-header">
-          <div>
-            <h3>Statistician & PR Lead <span style="color: var(--neon-pink);">@ BPS Barito Kuala</span></h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">2021 — 2024</p>
-          </div>
-          <div class="acc-icon"><i class="fas fa-plus"></i></div>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Statistician & Tim Humas — BPS Barito Kuala</span>
+          <span class="item-meta">2021 — 2024</span>
         </div>
-        <div class="acc-content">
-          <p style="color: var(--text-muted); line-height: 1.7;">
-            • Supervised public relations strategies and media publications.<br>
-            • Appointed National Instructor for the 2023 Agricultural Census & Post-Enumeration Survey.
-          </p>
+        <p class="item-desc">Memimpin tim kehumasan serta bertindak sebagai Instruktur Nasional untuk Sensus Pertanian 2023.</p>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Data Analyst (Freelance) — Kementerian Perindustrian</span>
+          <span class="item-meta">2020 — 2021</span>
         </div>
+        <p class="item-desc">Mengembangkan model estimasi time series untuk analisis bulanan sektor industri berbasis hutan dan perkebunan.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- Research Section -->
-  <section id="research" class="reveal">
-    <div class="section-title"><span>02.</span> Featured Research</div>
-    
-    <div class="grid-dynamic">
+  <!-- Riset & Publikasi -->
+  <section id="research">
+    <div class="section-label">Riset & Publikasi</div>
+    <div class="item-list">
       
-      <div class="card">
-        <span style="font-size: 0.75rem; color: var(--neon-cyan); font-weight: 700; letter-spacing: 1px;">JOURNAL PUBLICATION</span>
-        <h3 style="margin: 0.8rem 0; font-size: 1.1rem;">Simpson Index & Food Security in Kalimantan</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem;">
-          Evaluating food expenditure & consumption diversity near the new capital city (IKN) using threshold panel modeling.
-        </p>
-        <a href="https://jurnal.isei.or.id/index.php/isei/article/view/559" target="_blank" style="color: #fff; font-size: 0.85rem; font-weight: 700; text-decoration: none;">View Paper <i class="fas fa-arrow-right"></i></a>
-      </div>
-
-      <div class="card">
-        <span style="font-size: 0.75rem; color: var(--neon-pink); font-weight: 700; letter-spacing: 1px;">SCOPUS Q1 INDEXED</span>
-        <h3 style="margin: 0.8rem 0; font-size: 1.1rem;">Physical Infrastructure & Poverty Reduction</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem;">
-          Constructing Physical Infrastructure Index using Principal Component Analysis (PCA) across Kalimantan region.
-        </p>
-        <a href="https://doi.org/10.1016/j.cities.2023.104515" target="_blank" style="color: #fff; font-size: 0.85rem; font-weight: 700; text-decoration: none;">View Paper <i class="fas fa-arrow-right"></i></a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Awards Grid -->
-  <section id="awards" class="reveal">
-    <div class="section-title"><span>03.</span> Honors & Achievements</div>
-    
-    <div class="grid-dynamic">
-      <div class="card" style="border-left: 3px solid var(--neon-cyan);">
-        <i class="fas fa-trophy" style="font-size: 1.8rem; color: var(--neon-cyan); margin-bottom: 1rem;"></i>
-        <h3>1st Winner — Forum Pusaka Jateng 2025</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Bank Indonesia policy paper competition on railway-oriented sustainable tourism.</p>
-      </div>
-
-      <div class="card" style="border-left: 3px solid var(--neon-pink);">
-        <i class="fas fa-award" style="font-size: 1.8rem; color: var(--neon-pink); margin-bottom: 1rem;"></i>
-        <h3>1st Winner — ID Data Hackathon</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Australian Bureau of Statistics Grantee & Speaker at ANU Canberra.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Audiovisual Grid -->
-  <section id="audiovisual" class="reveal">
-    <div class="section-title"><span>04.</span> Audiovisual Directing</div>
-    
-    <div class="grid-dynamic">
-      
-      <div class="media-card">
-        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80" alt="Film 1">
-        <div class="media-overlay">
-          <span style="color: var(--neon-cyan); font-weight: 700; font-size: 0.8rem;">DIRECTOR & WRITER</span>
-          <h3 style="margin: 4px 0;">Statistik Membuka Mata (2024)</h3>
-          <p style="color: var(--text-muted); font-size: 0.85rem;">🏆 Best Short Film — Hari Statistik Nasional 2024</p>
+      <div class="item">
+        <div class="item-header">
+          <a href="https://jurnal.isei.or.id/index.php/isei/article/view/559" target="_blank" class="item-title">Simpson Index and Food Security: The Case Study of Kalimantan ↗</a>
+          <span class="item-meta">2025</span>
         </div>
+        <p class="item-desc">Jurnal Ekonomi Indonesia. Mengukur keragaman konsumsi pangan dan dampaknya terhadap penekanan laju inflasi daerah di sekitar IKN.</p>
       </div>
 
-      <div class="media-card">
-        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=800&q=80" alt="Film 2">
-        <div class="media-overlay">
-          <span style="color: var(--neon-pink); font-weight: 700; font-size: 0.8rem;">DIRECTOR & WRITER</span>
-          <h3 style="margin: 4px 0;">10 Tahun Kemudian (2023)</h3>
-          <p style="color: var(--text-muted); font-size: 0.85rem;">🏆 Bronze Jury Prize — Indonesian Census Film Festival</p>
+      <div class="item">
+        <div class="item-header">
+          <a href="https://doi.org/10.1016/j.cities.2023.104515" target="_blank" class="item-title">Measuring Physical Infrastructure Development as Poverty Reduction Program ↗</a>
+          <span class="item-meta">2023</span>
         </div>
+        <p class="item-desc">Cities Journal (Scopus Q1). Pembuatan Indeks Infrastruktur Fisik berbasis Principal Component Analysis untuk pemetaan kemiskinan.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="reveal">
-    <div class="card contact-card">
-      <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; margin-bottom: 1rem;">Ready to collaborate?</h2>
-      <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 2rem;">Let’s turn raw data, complex models, or film ideas into captivating stories.</p>
+  <!-- Penghargaan -->
+  <section id="awards">
+    <div class="section-label">Penghargaan</div>
+    <div class="item-list">
       
-      <a href="mailto:fatanzawiratama@gmail.com" class="glow-btn">
-        <i class="fas fa-paper-plane"></i>
-        <span>fatanzawiratama@gmail.com</span>
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Juara 1 — Forum Pusaka Jateng</span>
+          <span class="item-meta">2025</span>
+        </div>
+        <p class="item-desc">Bank Indonesia. Rekomendasi kebijakan pengembangan pariwisata berkelanjutan berbasis kereta api.</p>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Juara 1 — Indonesia Data Hackathon</span>
+          <span class="item-meta">2024 — 2025</span>
+        </div>
+        <p class="item-desc">Australian Bureau of Statistics. Riset mengenai struktur demografi dan aging population.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Audiovisual -->
+  <section id="audiovisual">
+    <div class="section-label">Karya Audiovisual</div>
+    <div class="media-grid">
+      
+      <a href="#" class="media-card">
+        <div class="media-thumb">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80" alt="Statistik Membuka Mata">
+        </div>
+        <div class="media-title">Statistik Membuka Mata (2024)</div>
+        <div class="media-sub">Sutradara & Penulis • Film Terbaik HSN 2024</div>
       </a>
+
+      <a href="#" class="media-card">
+        <div class="media-thumb">
+          <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80" alt="10 Tahun Kemudian">
+        </div>
+        <div class="media-title">10 Tahun Kemudian (2023)</div>
+        <div class="media-sub">Sutradara & Penulis • Bronze Jury Prize ICFF</div>
+      </a>
+
     </div>
   </section>
+
+  <!-- Footer Minimal -->
+  <footer>
+    <div>© <span id="year"></span> Budhi Fatanza Wiratama.</div>
+    <div class="footer-links">
+      <a href="mailto:fatanzawiratama@gmail.com">Email</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+    </div>
+  </footer>
 
   <script>
-    /* 1. Dynamic Canvas Interactive Particles */
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let width, height, particles = [];
-
-    function initCanvas() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      particles = [];
-      for(let i = 0; i < 40; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          radius: Math.random() * 2 + 1
-        });
-      }
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'rgba(0, 223, 216, 0.4)';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
-
-      particles.forEach((p, index) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if(p.x < 0 || p.x > width) p.vx *= -1;
-        if(p.y < 0 || p.y > height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fill();
-
-        for(let j = index + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if(dist < 180) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-      });
-      requestAnimationFrame(animateParticles);
-    }
-
-    window.addEventListener('resize', initCanvas);
-    initCanvas();
-    animateParticles();
-
-    /* 2. Typing Effect */
-    const words = ["Data Analyst", "Visual Storyteller", "Award-Winning Filmmaker"];
-    let wordIdx = 0, charIdx = 0, isDeleting = false;
-    const typedTarget = document.getElementById('typed-text');
-
-    function typeEffect() {
-      const currentWord = words[wordIdx];
-      if (isDeleting) {
-        typedTarget.textContent = currentWord.substring(0, charIdx - 1);
-        charIdx--;
-      } else {
-        typedTarget.textContent = currentWord.substring(0, charIdx + 1);
-        charIdx++;
-      }
-
-      let speed = isDeleting ? 40 : 80;
-
-      if (!isDeleting && charIdx === currentWord.length) {
-        speed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIdx === 0) {
-        isDeleting = false;
-        wordIdx = (wordIdx + 1) % words.length;
-        speed = 500;
-      }
-
-      setTimeout(typeEffect, speed);
-    }
-    typeEffect();
-
-    /* 3. Accordion Interaction */
-    document.querySelectorAll('.acc-header').forEach(header => {
-      header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        const icon = header.querySelector('.acc-icon i');
-        
-        content.classList.toggle('open');
-        icon.className = content.classList.contains('open') ? 'fas fa-minus' : 'fas fa-plus';
-      });
-    });
-
-    /* 4. Scroll Reveal */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.classList.add('active');
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
